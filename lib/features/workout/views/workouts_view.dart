@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
 import 'package:workout_app/common/constants/app_dimens.dart';
+import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
 class WorkoutsView extends StatelessWidget {
   const WorkoutsView({super.key});
@@ -13,13 +13,16 @@ class WorkoutsView extends StatelessWidget {
         children: [
           Container(),
           const Spacer(),
-          MaterialButton(
-            onPressed: () {},
-            color: AppColors.primaryColor,
-            padding: const EdgeInsets.all(24),
-            shape: const StadiumBorder(),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const AddOrEditWorkout(),
+                ),
+              );
+            },
             child: const Text('New Workout'),
-          ),
+          )
         ],
       ),
     );
