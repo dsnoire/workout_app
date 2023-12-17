@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/features/workout/cubits/cubit/workout_cubit.dart';
+import 'package:workout_app/features/workout/models/workout.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../common/constants/app_dimens.dart';
 
@@ -18,6 +22,7 @@ class AddOrEditWorkout extends StatefulWidget {
 }
 
 class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
+  final TextEditingController nameController = TextEditingController();
   String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,19 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                final workout = Workout(
+                  id: const Uuid().v4(),
+                  name: nameController.text,
+                  schedule: '',
+                );
+                await context.read<WorkoutCubit>().addWorkout(
+                      workout: workout,
+                      id: workout.id,
+                    );
+
+                Navigator.of(context).pop();
+              },
               child: const Text('Done'),
             ),
           )
@@ -37,7 +54,8 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
         padding: const EdgeInsets.all(AppDimens.sizeXL),
         child: Column(
           children: [
-            const TextField(
+            TextField(
+              controller: nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
                 labelStyle: TextStyle(
