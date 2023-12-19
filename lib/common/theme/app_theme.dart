@@ -11,7 +11,7 @@ abstract class AppTheme {
     useMaterial3: true,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         textStyle: const TextStyle(

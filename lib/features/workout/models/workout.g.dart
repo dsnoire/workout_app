@@ -19,7 +19,7 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
     return _$WorkoutImpl(
       id: fields[0] as String,
       name: fields[1] as String,
-      schedule: fields[2] as String,
+      schedule: fields[2] as WorkoutScheduleEnum,
     );
   }
 

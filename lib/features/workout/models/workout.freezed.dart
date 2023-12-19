@@ -21,7 +21,7 @@ mixin _$Workout {
   @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @HiveField(2)
-  String get schedule => throw _privateConstructorUsedError;
+  WorkoutScheduleEnum get schedule => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WorkoutCopyWith<Workout> get copyWith => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $WorkoutCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) String schedule});
+      @HiveField(2) WorkoutScheduleEnum schedule});
 }
 
 /// @nodoc
@@ -67,7 +67,7 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
       schedule: null == schedule
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
-              as String,
+              as WorkoutScheduleEnum,
     ) as $Val);
   }
 }
@@ -82,7 +82,7 @@ abstract class _$$WorkoutImplCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) String schedule});
+      @HiveField(2) WorkoutScheduleEnum schedule});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class __$$WorkoutImplCopyWithImpl<$Res>
       schedule: null == schedule
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
-              as String,
+              as WorkoutScheduleEnum,
     ));
   }
 }
@@ -121,7 +121,7 @@ class __$$WorkoutImplCopyWithImpl<$Res>
 
 @HiveType(typeId: 0)
 class _$WorkoutImpl implements _Workout {
-  const _$WorkoutImpl(
+  _$WorkoutImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.name,
       @HiveField(2) required this.schedule});
@@ -134,7 +134,7 @@ class _$WorkoutImpl implements _Workout {
   final String name;
   @override
   @HiveField(2)
-  final String schedule;
+  final WorkoutScheduleEnum schedule;
 
   @override
   String toString() {
@@ -163,10 +163,11 @@ class _$WorkoutImpl implements _Workout {
 }
 
 abstract class _Workout implements Workout {
-  const factory _Workout(
-      {@HiveField(0) required final String id,
-      @HiveField(1) required final String name,
-      @HiveField(2) required final String schedule}) = _$WorkoutImpl;
+  factory _Workout(
+          {@HiveField(0) required final String id,
+          @HiveField(1) required final String name,
+          @HiveField(2) required final WorkoutScheduleEnum schedule}) =
+      _$WorkoutImpl;
 
   @override
   @HiveField(0)
@@ -176,7 +177,7 @@ abstract class _Workout implements Workout {
   String get name;
   @override
   @HiveField(2)
-  String get schedule;
+  WorkoutScheduleEnum get schedule;
   @override
   @JsonKey(ignore: true)
   _$$WorkoutImplCopyWith<_$WorkoutImpl> get copyWith =>

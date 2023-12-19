@@ -1,54 +1,55 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
-import 'package:workout_app/features/workout/cubits/cubit/workout_cubit.dart';
-import 'package:workout_app/features/workout/models/workout.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../common/constants/app_dimens.dart';
+import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
+import 'package:workout_app/features/workout/models/workout.dart';
 
-const List<String> list = <String>[
-  'Full Body Workout',
-  'Push Pull Legs',
-  'Upper Lower',
-  'Split'
-];
+import '../../../common/constants/app_dimens.dart';
+import '../../common/widgets/custom_app_bar.dart';
+import '../cubits/workout_cubit/workout_cubit.dart';
+import '../widgets/workout_schedule_picker.dart';
 
 class AddOrEditWorkout extends StatefulWidget {
-  const AddOrEditWorkout({super.key});
+  const AddOrEditWorkout({
+    Key? key,
+    this.workout,
+  }) : super(key: key);
+
+  final Workout? workout;
 
   @override
   State<AddOrEditWorkout> createState() => _AddOrEditWorkoutState();
 }
 
 class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
-  final TextEditingController nameController = TextEditingController();
-  String dropdownValue = list.first;
+  late final TextEditingController nameController;
+  late WorkoutScheduleEnum schedule;
+
+  @override
+  void initState() {
+    if (widget.workout != null) {
+      schedule = widget.workout!.schedule;
+    } else {
+      schedule = WorkoutScheduleEnum.fullBodyWorkout;
+    }
+    nameController = TextEditingController(text: widget.workout?.name);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: ElevatedButton(
-              onPressed: () async {
-                final workout = Workout(
-                  id: const Uuid().v4(),
-                  name: nameController.text,
-                  schedule: '',
-                );
-                await context.read<WorkoutCubit>().addWorkout(
-                      workout: workout,
-                      id: workout.id,
-                    );
-
-                Navigator.of(context).pop();
-              },
-              child: const Text('Done'),
-            ),
-          )
-        ],
+      appBar: CustomAppBar(
+        actions: _buildAppBarActions(context),
       ),
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.sizeXL),
@@ -56,7 +57,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
           children: [
             TextField(
               controller: nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Name',
                 labelStyle: TextStyle(
                   height: -0.2,
@@ -64,41 +65,73 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
               ),
               maxLength: 50,
             ),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.unselectedGreyColor,
-                  width: 0.7,
-                ),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: DropdownButton(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 22,
-                  vertical: 10,
-                ),
-                underline: const SizedBox(),
-                icon: const Icon(Icons.keyboard_arrow_down_rounded),
-                dropdownColor: AppColors.primaryColor,
-                value: dropdownValue,
-                items: list.map((e) {
-                  return DropdownMenuItem(
-                    value: e,
-                    child: Center(child: Text(e)),
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  setState(
-                    () {
-                      dropdownValue = value!;
-                    },
-                  );
-                },
-              ),
+            WorkoutSchedulePicker(
+              schedule: schedule,
+              onChanged: (WorkoutScheduleEnum? value) {
+                setState(() {
+                  schedule = value!;
+                });
+              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  List<Widget> _buildAppBarActions(BuildContext context) {
+    return widget.workout == null
+        ? [
+            ElevatedButton(
+              onPressed: () async {
+                final workout = Workout(
+                  id: const Uuid().v4(),
+                  name: nameController.text,
+                  schedule: schedule,
+                );
+                await context.read<WorkoutCubit>().addWorkout(
+                      workout: workout,
+                      id: workout.id,
+                    );
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Done'),
+            )
+          ]
+        : [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.warningColor,
+              ),
+              onPressed: () async {
+                await context.read<WorkoutCubit>().removeWorkout(
+                      id: widget.workout!.id,
+                    );
+
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Remove'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final workout = widget.workout!.copyWith(
+                  name: nameController.text,
+                  schedule: schedule,
+                );
+                await context.read<WorkoutCubit>().editWorkout(
+                      workout: workout,
+                      id: workout.id,
+                    );
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: const Text('Edit'),
+            )
+          ];
   }
 }

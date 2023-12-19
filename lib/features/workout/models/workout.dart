@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 
 part 'workout.freezed.dart';
 
@@ -8,9 +9,9 @@ part 'workout.g.dart';
 @freezed
 class Workout with _$Workout {
   @HiveType(typeId: 0)
-  const factory Workout({
+  factory Workout({
     @HiveField(0) required String id,
     @HiveField(1) required String name,
-    @HiveField(2) required String schedule,
+    @HiveField(2) required WorkoutScheduleEnum schedule,
   }) = _Workout;
 }

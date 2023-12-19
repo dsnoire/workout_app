@@ -37,8 +37,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
         workout: workout,
         id: id,
       );
-      final workouts = workoutRepository.getWorkouts;
-      emit(WorkoutState.loaded(workouts: workouts));
+      getWorkouts();
     } catch (e) {
       emit(
         WorkoutState.error(
@@ -58,6 +57,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
         workout: workout,
         id: id,
       );
+      getWorkouts();
     } catch (e) {
       emit(
         WorkoutState.error(
@@ -71,6 +71,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
     emit(const WorkoutState.loading());
     try {
       await workoutRepository.removeWorkout(id: id);
+      getWorkouts();
     } catch (e) {
       emit(
         WorkoutState.error(
