@@ -14,8 +14,9 @@ class WorkoutApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              WorkoutCubit(WorkoutRepositoryImpl())..getWorkouts(),
+          create: (context) => WorkoutCubit(
+            WorkoutRepositoryImpl(),
+          )..getWorkouts(),
         )
       ],
       child: MaterialApp(

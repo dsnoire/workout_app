@@ -11,7 +11,10 @@ abstract class AppTheme {
     useMaterial3: true,
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 22,
+          vertical: 18,
+        ),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         textStyle: const TextStyle(
@@ -20,8 +23,48 @@ abstract class AppTheme {
         ),
       ),
     ),
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 32,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 28,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 24,
+      ),
+      titleLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+      titleMedium: TextStyle(
+        fontSize: 16,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 12,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 11,
+      ),
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
+    ),
+    listTileTheme: ListTileThemeData(
+      tileColor: AppColors.contrastColor,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 22,
+        vertical: 16,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
     ),
   );
 }
