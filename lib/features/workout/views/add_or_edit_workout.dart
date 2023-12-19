@@ -57,11 +57,8 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
               controller: nameController,
               decoration: const InputDecoration(
                 labelText: 'Name',
-                labelStyle: TextStyle(
-                  height: -0.2,
-                ),
               ),
-              maxLength: 50,
+              maxLength: 30,
             ),
             WorkoutSchedulePicker(
               schedule: schedule,

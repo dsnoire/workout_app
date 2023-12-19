@@ -44,7 +44,7 @@ abstract class AppTheme {
         fontSize: 14,
       ),
       labelLarge: TextStyle(
-        fontSize: 14,
+        fontSize: 16,
       ),
       labelMedium: TextStyle(
         fontSize: 12,
@@ -65,6 +65,14 @@ abstract class AppTheme {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide.none,
+      ),
+      filled: true,
+      fillColor: AppColors.contrastColor,
     ),
   );
 }

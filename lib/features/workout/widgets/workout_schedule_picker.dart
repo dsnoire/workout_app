@@ -17,7 +17,10 @@ class WorkoutSchedulePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('Schedule'),
+        Text(
+          'Schedule',
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
         const SizedBox(height: 8),
         DecoratedBox(
           decoration: BoxDecoration(
