@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -26,49 +27,55 @@ class _RootViewState extends State<RootView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: views[index],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        onTap: (value) {
-          setState(() {
-            index = value;
-          });
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
-            activeIcon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/home_filled_icon.svg',
-              color: Colors.white,
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashFactory: NoSplash.splashFactory,
+          splashColor: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          currentIndex: index,
+          onTap: (value) {
+            setState(() {
+              index = value;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: AppColors.backgroundColor,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+          items: const [
+            BottomNavigationBarItem(
+              activeIcon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/home_filled_icon.svg',
+                color: Colors.white,
+              ),
+              icon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/home_icon.svg',
+              ),
+              label: 'Home',
             ),
-            icon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/home_icon.svg',
+            BottomNavigationBarItem(
+              activeIcon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/dumbbell_filled_icon.svg',
+                color: Colors.white,
+              ),
+              icon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/dumbbell_icon.svg',
+              ),
+              label: 'Workouts',
             ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            activeIcon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/dumbbell_filled_icon.svg',
-              color: Colors.white,
+            BottomNavigationBarItem(
+              activeIcon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/chart_icon.svg',
+                color: Colors.white,
+              ),
+              icon: _BottomNavigationBarItemIcon(
+                path: 'assets/icons/chart_icon.svg',
+              ),
+              label: 'Statistics',
             ),
-            icon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/dumbbell_icon.svg',
-            ),
-            label: 'Workouts',
-          ),
-          BottomNavigationBarItem(
-            activeIcon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/chart_icon.svg',
-              color: Colors.white,
-            ),
-            icon: _BottomNavigationBarItemIcon(
-              path: 'assets/icons/chart_icon.svg',
-            ),
-            label: 'Statistics',
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -83,11 +90,12 @@ class _BottomNavigationBarItemIcon extends StatelessWidget {
 
   final String path;
   final Color? color;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
-      width: 30,
+      height: 25,
+      width: 25,
       child: SvgPicture.asset(
         path,
         colorFilter: ColorFilter.mode(
