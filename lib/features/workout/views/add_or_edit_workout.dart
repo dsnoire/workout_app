@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/features/common/widgets/action_button.dart';
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 
@@ -55,9 +56,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
           children: [
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-              ),
+              decoration: const InputDecoration(hintText: 'Name'),
               maxLength: 30,
             ),
             WorkoutSchedulePicker(
@@ -77,7 +76,8 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
   List<Widget> _buildAppBarActions(BuildContext context) {
     return widget.workout == null
         ? [
-            ElevatedButton(
+            ActionButton(
+              text: 'Done',
               onPressed: () async {
                 final workout = Workout(
                   id: const Uuid().v4(),
@@ -92,14 +92,12 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   Navigator.of(context).pop();
                 }
               },
-              child: const Text('Done'),
             )
           ]
         : [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.warningColor,
-              ),
+            ActionButton(
+              text: 'Remove',
+              background: AppColors.warningColor,
               onPressed: () async {
                 await context.read<WorkoutCubit>().removeWorkout(
                       id: widget.workout!.id,
@@ -109,9 +107,9 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   Navigator.of(context).pop();
                 }
               },
-              child: const Text('Remove'),
             ),
-            ElevatedButton(
+            ActionButton(
+              text: 'Done',
               onPressed: () async {
                 final workout = widget.workout!.copyWith(
                   name: nameController.text,
@@ -125,7 +123,6 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   Navigator.of(context).pop();
                 }
               },
-              child: const Text('Edit'),
             )
           ];
   }

@@ -12,14 +12,13 @@ abstract class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(
-          horizontal: 22,
-          vertical: 18,
+          horizontal: 18,
+          vertical: 15,
         ),
         backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
         textStyle: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
+          fontSize: 16,
         ),
       ),
     ),
