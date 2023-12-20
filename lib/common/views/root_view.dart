@@ -39,7 +39,7 @@ class _RootViewState extends State<RootView> {
               index = value;
             });
           },
-          type: BottomNavigationBarType.fixed,
+          elevation: 0,
           backgroundColor: AppColors.backgroundColor,
           showUnselectedLabels: false,
           showSelectedLabels: false,

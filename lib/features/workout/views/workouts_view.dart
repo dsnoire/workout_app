@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_app/common/constants/app_dimens.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
+import '../../../common/constants/app_colors.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
 import '../widgets/workouts_list_view.dart';
 
@@ -20,29 +21,49 @@ class WorkoutsView extends StatelessWidget {
         horizontal: AppDimens.sizeXL,
         vertical: 32,
       ),
-      child: Column(
+      child: Stack(
         children: [
-          BlocBuilder<WorkoutCubit, WorkoutState>(
-            builder: (context, state) {
-              return state.when(
-                loading: () => const Center(child: CircularProgressIndicator()),
-                loaded: (workouts) => WorkoutsListView(workouts: workouts),
-                empty: () => const Center(child: Text('No workouts')),
-                error: (message) => Center(child: Text(message)),
-              );
-            },
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BlocBuilder<WorkoutCubit, WorkoutState>(
+                builder: (context, state) {
+                  return state.when(
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    loaded: (workouts) => Expanded(
+                      child: WorkoutsListView(workouts: workouts),
+                    ),
+                    empty: () => const Center(
+                      child: Text('No workouts'),
+                    ),
+                    error: (message) => Center(
+                      child: Text(message),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-          const Spacer(),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AddOrEditWorkout(),
-                ),
-              );
-            },
-            child: const Text('New Workout'),
-          )
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: IconButton(
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.primaryColor,
+                iconSize: 35,
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddOrEditWorkout(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.add),
+            ),
+          ),
         ],
       ),
     );
