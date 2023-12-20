@@ -22,6 +22,8 @@ mixin _$Workout {
   String get name => throw _privateConstructorUsedError;
   @HiveField(2)
   WorkoutScheduleEnum get schedule => throw _privateConstructorUsedError;
+  @HiveField(3)
+  Map<String, bool> get weekdays => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WorkoutCopyWith<Workout> get copyWith => throw _privateConstructorUsedError;
@@ -35,7 +37,8 @@ abstract class $WorkoutCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) WorkoutScheduleEnum schedule});
+      @HiveField(2) WorkoutScheduleEnum schedule,
+      @HiveField(3) Map<String, bool> weekdays});
 }
 
 /// @nodoc
@@ -54,6 +57,7 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
     Object? id = null,
     Object? name = null,
     Object? schedule = null,
+    Object? weekdays = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -68,6 +72,10 @@ class _$WorkoutCopyWithImpl<$Res, $Val extends Workout>
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
               as WorkoutScheduleEnum,
+      weekdays: null == weekdays
+          ? _value.weekdays
+          : weekdays // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ) as $Val);
   }
 }
@@ -82,7 +90,8 @@ abstract class _$$WorkoutImplCopyWith<$Res> implements $WorkoutCopyWith<$Res> {
   $Res call(
       {@HiveField(0) String id,
       @HiveField(1) String name,
-      @HiveField(2) WorkoutScheduleEnum schedule});
+      @HiveField(2) WorkoutScheduleEnum schedule,
+      @HiveField(3) Map<String, bool> weekdays});
 }
 
 /// @nodoc
@@ -99,6 +108,7 @@ class __$$WorkoutImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? schedule = null,
+    Object? weekdays = null,
   }) {
     return _then(_$WorkoutImpl(
       id: null == id
@@ -113,6 +123,10 @@ class __$$WorkoutImplCopyWithImpl<$Res>
           ? _value.schedule
           : schedule // ignore: cast_nullable_to_non_nullable
               as WorkoutScheduleEnum,
+      weekdays: null == weekdays
+          ? _value._weekdays
+          : weekdays // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ));
   }
 }
@@ -124,7 +138,9 @@ class _$WorkoutImpl implements _Workout {
   _$WorkoutImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.name,
-      @HiveField(2) required this.schedule});
+      @HiveField(2) required this.schedule,
+      @HiveField(3) required final Map<String, bool> weekdays})
+      : _weekdays = weekdays;
 
   @override
   @HiveField(0)
@@ -135,10 +151,18 @@ class _$WorkoutImpl implements _Workout {
   @override
   @HiveField(2)
   final WorkoutScheduleEnum schedule;
+  final Map<String, bool> _weekdays;
+  @override
+  @HiveField(3)
+  Map<String, bool> get weekdays {
+    if (_weekdays is EqualUnmodifiableMapView) return _weekdays;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_weekdays);
+  }
 
   @override
   String toString() {
-    return 'Workout(id: $id, name: $name, schedule: $schedule)';
+    return 'Workout(id: $id, name: $name, schedule: $schedule, weekdays: $weekdays)';
   }
 
   @override
@@ -149,11 +173,13 @@ class _$WorkoutImpl implements _Workout {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.schedule, schedule) ||
-                other.schedule == schedule));
+                other.schedule == schedule) &&
+            const DeepCollectionEquality().equals(other._weekdays, _weekdays));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, schedule);
+  int get hashCode => Object.hash(runtimeType, id, name, schedule,
+      const DeepCollectionEquality().hash(_weekdays));
 
   @JsonKey(ignore: true)
   @override
@@ -164,10 +190,10 @@ class _$WorkoutImpl implements _Workout {
 
 abstract class _Workout implements Workout {
   factory _Workout(
-          {@HiveField(0) required final String id,
-          @HiveField(1) required final String name,
-          @HiveField(2) required final WorkoutScheduleEnum schedule}) =
-      _$WorkoutImpl;
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String name,
+      @HiveField(2) required final WorkoutScheduleEnum schedule,
+      @HiveField(3) required final Map<String, bool> weekdays}) = _$WorkoutImpl;
 
   @override
   @HiveField(0)
@@ -178,6 +204,9 @@ abstract class _Workout implements Workout {
   @override
   @HiveField(2)
   WorkoutScheduleEnum get schedule;
+  @override
+  @HiveField(3)
+  Map<String, bool> get weekdays;
   @override
   @JsonKey(ignore: true)
   _$$WorkoutImplCopyWith<_$WorkoutImpl> get copyWith =>

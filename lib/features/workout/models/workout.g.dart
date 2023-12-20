@@ -20,19 +20,22 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
       id: fields[0] as String,
       name: fields[1] as String,
       schedule: fields[2] as WorkoutScheduleEnum,
+      weekdays: (fields[3] as Map).cast<String, bool>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$WorkoutImpl obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.schedule);
+      ..write(obj.schedule)
+      ..writeByte(3)
+      ..write(obj.weekdays);
   }
 
   @override

@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/features/workout/extensions/weekday_abbreviation.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
 import '../models/workout.dart';
-
-const weekdays = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
 
 class WorkoutListTile extends StatelessWidget {
   const WorkoutListTile({
@@ -49,22 +40,15 @@ class WorkoutListTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
-            7,
-            (index) => Column(
-              children: [
-                Text(
-                  weekdays[index].split('').getRange(0, 3).join(),
-                ),
-                const SizedBox(height: 5),
-                CircleAvatar(
-                  backgroundColor: index % 2 == 0
-                      ? const Color.fromARGB(255, 0, 102, 185)
-                      : const Color(0xFF242424),
-                  child: Text(
-                    index.toString(),
-                  ),
-                ),
-              ],
+            workout.weekdays.length,
+            (index) => CircleAvatar(
+              backgroundColor: workout.weekdays.values.elementAt(index)
+                  ? const Color.fromARGB(255, 0, 102, 185)
+                  : const Color(0xFF242424),
+              child: Text(
+                workout.weekdays.keys.getWeekdayAbbreviation(index: index),
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
             ),
           ),
         ),
