@@ -10,6 +10,7 @@ import 'package:workout_app/features/workout/models/workout.dart';
 import '../../../common/constants/app_dimens.dart';
 import '../../common/widgets/custom_app_bar.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
+import '../widgets/color_picker.dart';
 import '../widgets/weekdays_picker.dart';
 import '../widgets/workout_schedule_picker.dart';
 
@@ -28,6 +29,7 @@ class AddOrEditWorkout extends StatefulWidget {
 class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
   late final TextEditingController nameController;
   late WorkoutScheduleEnum schedule;
+  late Map<int, bool> workoutColors;
   late Map<String, bool> weekdays;
 
   @override
@@ -35,6 +37,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
     if (widget.workout != null) {
       schedule = widget.workout!.schedule;
       weekdays = Map.from(widget.workout!.weekdays);
+      workoutColors = Map.from(widget.workout!.color);
     } else {
       schedule = WorkoutScheduleEnum.fullBodyWorkout;
       weekdays = {
@@ -45,6 +48,17 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
         'Friday': false,
         'Saturday': false,
         'Sunday': false,
+      };
+      workoutColors = {
+        AppColors.primaryColor.value: true,
+        const Color(0xFFDF4F45).value: false,
+        const Color(0xFF44A3F1).value: false,
+        const Color(0xFF8A8700).value: false,
+        const Color(0xFF4BA54E).value: false,
+        const Color(0xFF7850BE).value: false,
+        const Color(0xFFB18646).value: false,
+        const Color(0xFFB52BEC).value: false,
+        const Color(0xFFDBA400).value: false,
       };
     }
     nameController = TextEditingController(text: widget.workout?.name);
@@ -72,20 +86,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
               decoration: const InputDecoration(hintText: 'Name'),
               maxLength: 30,
             ),
-            SizedBox(
-              height: 75,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return CircleAvatar(
-                    backgroundColor: index % 2 == 0 ? Colors.red : Colors.green,
-                    child: const Icon(Icons.check),
-                  );
-                },
-                separatorBuilder: (_, __) => const SizedBox(width: 20),
-                itemCount: 30,
-              ),
-            ),
+            ColorPicker(workoutColors: workoutColors),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 24),
               child: Divider(thickness: 0.3),
@@ -124,6 +125,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   name: nameController.text,
                   schedule: schedule,
                   weekdays: weekdays,
+                  color: workoutColors,
                 );
                 await context.read<WorkoutCubit>().addWorkout(
                       workout: workout,
@@ -156,6 +158,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   name: nameController.text,
                   schedule: schedule,
                   weekdays: weekdays,
+                  color: workoutColors,
                 );
                 await context.read<WorkoutCubit>().editWorkout(
                       workout: workout,

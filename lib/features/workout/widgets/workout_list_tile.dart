@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/common/constants/app_colors.dart';
 import 'package:workout_app/features/workout/extensions/weekday_abbreviation.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
@@ -41,15 +42,23 @@ class WorkoutListTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             workout.weekdays.length,
-            (index) => CircleAvatar(
-              backgroundColor: workout.weekdays.values.elementAt(index)
-                  ? const Color.fromARGB(255, 0, 102, 185)
-                  : const Color(0xFF242424),
-              child: Text(
-                workout.weekdays.keys.getWeekdayAbbreviation(index: index),
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ),
+            (index) {
+              final isSelected = workout.weekdays.values.elementAt(index);
+              final color = workout.color.entries
+                  .firstWhere((element) => element.value == true)
+                  .key;
+              return CircleAvatar(
+                backgroundColor: isSelected == true
+                    ? Color(color)
+                    : const Color.fromARGB(255, 22, 22, 22),
+                child: Text(
+                  workout.weekdays.keys.getWeekdayAbbreviation(index: index),
+                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                        fontWeight: isSelected ? FontWeight.bold : null,
+                      ),
+                ),
+              );
+            },
           ),
         ),
       ),
