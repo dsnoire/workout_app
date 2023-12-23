@@ -159,7 +159,6 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                   schedule: schedule,
                   weekdays: weekdays,
                   color: workoutColors,
-                  createdAt: DateTime.timestamp(),
                 );
                 await context.read<WorkoutCubit>().editWorkout(
                       workout: workout,
