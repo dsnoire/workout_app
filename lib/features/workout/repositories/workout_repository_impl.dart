@@ -6,7 +6,10 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
   final _box = Hive.box('workouts');
 
   @override
-  List<Workout> get getWorkouts => _box.values.toList().cast<Workout>();
+  List<Workout> get getWorkouts => _box.values.toList().cast<Workout>()
+    ..sort(
+      (b, a) => a.createdAt.compareTo(b.createdAt),
+    );
 
   @override
   Future<void> addWorkout({

@@ -15,5 +15,6 @@ class Workout with _$Workout {
     @HiveField(2) required WorkoutScheduleEnum schedule,
     @HiveField(3) required Map<String, bool> weekdays,
     @HiveField(4) required Map<int, bool> color,
+    @HiveField(5) required DateTime createdAt,
   }) = _Workout;
 }
