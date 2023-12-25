@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
-import 'package:workout_app/features/workout/models/workout.dart';
+import 'package:workout_app/common/di/di.dart';
+import 'package:workout_app/common/hive/hive_init.dart';
 
 import 'workout_app.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(WorkoutImplAdapter());
-  Hive.registerAdapter(WorkoutScheduleEnumAdapter());
-  await Hive.openBox('workouts');
+  await hiveInit();
+  configureDependencies();
   runApp(const WorkoutApp());
 }

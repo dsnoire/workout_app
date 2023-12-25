@@ -121,12 +121,13 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
               text: 'Done',
               onPressed: () async {
                 final workout = Workout(
-                    id: const Uuid().v4(),
-                    name: nameController.text,
-                    schedule: schedule,
-                    weekdays: weekdays,
-                    color: workoutColors,
-                    createdAt: DateTime.timestamp());
+                  id: const Uuid().v4(),
+                  name: nameController.text,
+                  schedule: schedule,
+                  weekdays: weekdays,
+                  color: workoutColors,
+                  createdAt: DateTime.timestamp(),
+                );
                 await context.read<WorkoutCubit>().addWorkout(
                       workout: workout,
                       id: workout.id,

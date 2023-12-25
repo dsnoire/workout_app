@@ -11,6 +11,7 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
   final int typeId = 0;
 
   @override
+  // ignore: library_private_types_in_public_api
   _$WorkoutImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
@@ -27,6 +28,7 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
   }
 
   @override
+  // ignore: library_private_types_in_public_api
   void write(BinaryWriter writer, _$WorkoutImpl obj) {
     writer
       ..writeByte(6)

@@ -1,7 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 import 'package:workout_app/features/workout/repositories/workout_repository.dart';
 
+@Injectable(as: WorkoutRepository)
 class WorkoutRepositoryImpl implements WorkoutRepository {
   final _box = Hive.box('workouts');
 

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:workout_app/features/workout/repositories/workout_repository.dart';
 
 import '../../models/workout.dart';
@@ -7,17 +8,18 @@ import '../../models/workout.dart';
 part 'workout_state.dart';
 part 'workout_cubit.freezed.dart';
 
+@injectable
 class WorkoutCubit extends Cubit<WorkoutState> {
-  WorkoutCubit(this.workoutRepository)
+  WorkoutCubit(this._workoutRepository)
       : super(
           const WorkoutState.loaded(
             workouts: [],
           ),
         );
-  final WorkoutRepository workoutRepository;
+  final WorkoutRepository _workoutRepository;
 
   void getWorkouts() {
-    final workouts = workoutRepository.getWorkouts;
+    final workouts = _workoutRepository.getWorkouts;
     if (workouts.isEmpty) {
       emit(const WorkoutState.empty());
     } else {
@@ -33,7 +35,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   }) async {
     emit(const WorkoutState.loading());
     try {
-      await workoutRepository.addWorkout(
+      await _workoutRepository.addWorkout(
         workout: workout,
         id: id,
       );
@@ -53,7 +55,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   }) async {
     emit(const WorkoutState.loading());
     try {
-      await workoutRepository.editWorkout(
+      await _workoutRepository.editWorkout(
         workout: workout,
         id: id,
       );
@@ -70,7 +72,7 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   Future<void> removeWorkout({required String id}) async {
     emit(const WorkoutState.loading());
     try {
-      await workoutRepository.removeWorkout(id: id);
+      await _workoutRepository.removeWorkout(id: id);
       getWorkouts();
     } catch (e) {
       emit(

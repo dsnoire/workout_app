@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
 import 'package:workout_app/features/workout/extensions/weekday_abbreviation.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
