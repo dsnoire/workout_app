@@ -23,15 +23,19 @@ class _ColorPickerState extends State<ColorPicker> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              setState(() {
-                widget.workoutColors.updateAll((key, value) {
-                  if (widget.workoutColors.keys.elementAt(index) == key) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                });
-              });
+              setState(
+                () {
+                  widget.workoutColors.updateAll(
+                    (key, value) {
+                      if (widget.workoutColors.keys.elementAt(index) == key) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    },
+                  );
+                },
+              );
             },
             child: CircleAvatar(
               backgroundColor:

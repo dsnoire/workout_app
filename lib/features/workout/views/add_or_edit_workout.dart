@@ -51,14 +51,19 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
       };
       workoutColors = {
         AppColors.primaryColor.value: true,
-        const Color(0xFFDF4F45).value: false,
-        const Color(0xFF44A3F1).value: false,
-        const Color(0xFF8A8700).value: false,
-        const Color(0xFF4BA54E).value: false,
-        const Color(0xFF7850BE).value: false,
-        const Color(0xFFB18646).value: false,
-        const Color(0xFFB52BEC).value: false,
-        const Color(0xFFDBA400).value: false,
+        const Color(0xFFF94144).value: false,
+        const Color(0xFFF3722C).value: false,
+        const Color(0xFFF8961E).value: false,
+        const Color(0xFFF9844A).value: false,
+        const Color(0xFFF9C74F).value: false,
+        const Color(0xFF90BE6D).value: false,
+        const Color(0xFF43AA8B).value: false,
+        const Color(0xFF4D908E).value: false,
+        const Color(0xFF577590).value: false,
+        const Color(0xFF277DA1).value: false,
+        const Color(0xFFD2B7E5).value: false,
+        const Color(0xFFB185DB).value: false,
+        const Color(0xFF6247AA).value: false,
       };
     }
     nameController = TextEditingController(text: widget.workout?.name);

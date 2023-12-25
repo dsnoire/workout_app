@@ -47,9 +47,8 @@ class WorkoutListTile extends StatelessWidget {
                   .firstWhere((element) => element.value == true)
                   .key;
               return CircleAvatar(
-                backgroundColor: isSelected == true
-                    ? Color(color)
-                    : const Color.fromARGB(255, 22, 22, 22),
+                backgroundColor:
+                    isSelected == true ? Color(color) : const Color(0xFF131313),
                 child: Text(
                   workout.weekdays.keys.getWeekdayAbbreviation(index: index),
                   style: Theme.of(context).textTheme.labelMedium!.copyWith(

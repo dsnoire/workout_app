@@ -47,8 +47,8 @@ class _WeekdaysPickerState extends State<WeekdaysPicker> {
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 12,
+                    horizontal: 8,
+                    vertical: 10,
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -59,7 +59,7 @@ class _WeekdaysPickerState extends State<WeekdaysPicker> {
                   ),
                   child: Text(
                     widget.weekdays.keys.getWeekdayAbbreviation(index: index),
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    style: Theme.of(context).textTheme.labelMedium!.copyWith(
                           color: isSelected
                               ? Colors.white
                               : AppColors.unselectedGreyColor,
