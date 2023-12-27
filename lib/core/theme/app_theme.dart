@@ -73,9 +73,13 @@ abstract class AppTheme {
       filled: true,
       fillColor: AppColors.contrastColor,
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: const DialogTheme(
       backgroundColor: AppColors.contrastColor,
       elevation: 0,
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColors.primaryColor,
+      shape: StadiumBorder(),
     ),
   );
 }
