@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/core/constants/app_colors.dart';
 
 abstract class AppTheme {
   static final theme = ThemeData(
@@ -72,6 +72,10 @@ abstract class AppTheme {
       ),
       filled: true,
       fillColor: AppColors.contrastColor,
+    ),
+    dialogTheme: DialogTheme(
+      backgroundColor: AppColors.contrastColor,
+      elevation: 0,
     ),
   );
 }

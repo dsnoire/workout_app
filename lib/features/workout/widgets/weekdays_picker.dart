@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/features/workout/extensions/weekday_abbreviation.dart';
 
-import '../../../common/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 
 class WeekdaysPicker extends StatefulWidget {
   WeekdaysPicker({

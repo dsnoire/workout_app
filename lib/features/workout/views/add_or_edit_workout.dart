@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/core/constants/app_colors.dart';
 import 'package:workout_app/features/common/widgets/action_button.dart';
 
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 
-import '../../../common/constants/app_dimens.dart';
+import '../../../core/constants/app_dimens.dart';
 import '../../common/widgets/custom_app_bar.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/weekdays_picker.dart';
 import '../widgets/workout_schedule_picker.dart';
 
-class AddOrEditWorkout extends StatefulWidget {
-  const AddOrEditWorkout({
+class AddOrEditWorkoutView extends StatefulWidget {
+  const AddOrEditWorkoutView({
     Key? key,
     this.workout,
   }) : super(key: key);
@@ -23,10 +24,10 @@ class AddOrEditWorkout extends StatefulWidget {
   final Workout? workout;
 
   @override
-  State<AddOrEditWorkout> createState() => _AddOrEditWorkoutState();
+  State<AddOrEditWorkoutView> createState() => _AddOrEditWorkoutViewState();
 }
 
-class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
+class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
   late final TextEditingController nameController;
   late WorkoutScheduleEnum schedule;
   late Map<int, bool> workoutColors;
@@ -138,7 +139,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                       id: workout.id,
                     );
                 if (context.mounted) {
-                  Navigator.of(context).pop();
+                  context.pop();
                 }
               },
             )
@@ -147,14 +148,39 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
             ActionButton(
               text: 'Remove',
               background: AppColors.warningColor,
-              onPressed: () async {
-                await context.read<WorkoutCubit>().removeWorkout(
-                      id: widget.workout!.id,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Remove workout'),
+                      content: const Text(
+                          'Are you sure you want to permanently remove workout?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => context.pop(),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.white.withAlpha(150),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            await context.read<WorkoutCubit>().removeWorkout(
+                                  id: widget.workout!.id,
+                                );
+                            if (context.mounted) {
+                              context.go('/workouts');
+                            }
+                          },
+                          child: const Text('Ok'),
+                        )
+                      ],
                     );
-
-                if (context.mounted) {
-                  Navigator.of(context).pop();
-                }
+                  },
+                );
               },
             ),
             ActionButton(
@@ -171,7 +197,7 @@ class _AddOrEditWorkoutState extends State<AddOrEditWorkout> {
                       id: workout.id,
                     );
                 if (context.mounted) {
-                  Navigator.of(context).pop();
+                  context.pop();
                 }
               },
             )

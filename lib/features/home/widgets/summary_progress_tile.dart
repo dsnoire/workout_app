@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workout_app/common/constants/app_colors.dart';
+import 'package:workout_app/core/constants/app_colors.dart';
 
 class SummaryProgressTile extends StatelessWidget {
   const SummaryProgressTile({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/constants/app_colors.dart';
+import '../../../core/constants/app_colors.dart';
 import '../enums/workout_schedule_enum.dart';
 
 class WorkoutSchedulePicker extends StatelessWidget {

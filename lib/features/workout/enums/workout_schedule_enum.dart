@@ -4,7 +4,7 @@ part 'workout_schedule_enum.g.dart';
 @HiveType(typeId: 1)
 enum WorkoutScheduleEnum {
   @HiveField(0)
-  fullBodyWorkout('Full Body Workout'),
+  fullBodyWorkout('Full Body'),
   @HiveField(1)
   pushPullLegs('Push Pull Legs'),
   @HiveField(2)

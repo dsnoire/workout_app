@@ -6,25 +6,30 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SummaryProgressTile(),
-            SummaryProgressTile(),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SummaryProgressTile(),
-            SummaryProgressTile(),
-          ],
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SummaryProgressTile(),
+              SummaryProgressTile(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SummaryProgressTile(),
+              SummaryProgressTile(),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

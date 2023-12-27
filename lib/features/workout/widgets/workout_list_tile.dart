@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workout_app/features/workout/extensions/weekday_abbreviation.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
 
@@ -15,23 +16,30 @@ class WorkoutListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (BuildContext context) => AddOrEditWorkout(
-            workout: workout,
-          ),
-        ),
+      onTap: () => context.push(
+        '/edit-workout',
+        extra: workout,
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            workout.name,
-            style: Theme.of(context).textTheme.titleLarge,
+          Expanded(
+            flex: 4,
+            child: Text(
+              workout.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            workout.schedule.name,
-            style: Theme.of(context).textTheme.titleSmall,
+          Expanded(
+            flex: 3,
+            child: Text(
+              workout.schedule.name,
+              textAlign: TextAlign.end,
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
           ),
         ],
       ),
