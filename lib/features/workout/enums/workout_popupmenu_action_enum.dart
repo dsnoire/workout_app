@@ -1,0 +1,4 @@
+enum WorkoutPopupMenuActionEnum {
+  edit,
+  remove,
+}
