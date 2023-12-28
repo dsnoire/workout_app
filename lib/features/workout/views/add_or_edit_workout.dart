@@ -7,6 +7,8 @@ import 'package:workout_app/features/common/widgets/action_button.dart';
 
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
+import 'package:workout_app/features/workout/utils/workout_colors.dart';
+import 'package:workout_app/features/workout/utils/workout_weekdays.dart';
 
 import '../../../core/constants/app_dimens.dart';
 import '../../common/widgets/custom_app_bar.dart';
@@ -30,7 +32,7 @@ class AddOrEditWorkoutView extends StatefulWidget {
 class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
   late final TextEditingController nameController;
   late WorkoutScheduleEnum schedule;
-  late Map<int, bool> workoutColors;
+  late Map<int, bool> colors;
   late Map<String, bool> weekdays;
 
   @override
@@ -38,34 +40,11 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
     if (widget.workout != null) {
       schedule = widget.workout!.schedule;
       weekdays = Map.from(widget.workout!.weekdays);
-      workoutColors = Map.from(widget.workout!.color);
+      colors = Map.from(widget.workout!.color);
     } else {
       schedule = WorkoutScheduleEnum.fullBodyWorkout;
-      weekdays = {
-        'Monday': false,
-        'Tuesday': false,
-        'Wednesday': false,
-        'Thursday': false,
-        'Friday': false,
-        'Saturday': false,
-        'Sunday': false,
-      };
-      workoutColors = {
-        AppColors.primaryColor.value: true,
-        const Color(0xFFF94144).value: false,
-        const Color(0xFFF3722C).value: false,
-        const Color(0xFFF8961E).value: false,
-        const Color(0xFFF9844A).value: false,
-        const Color(0xFFF9C74F).value: false,
-        const Color(0xFF90BE6D).value: false,
-        const Color(0xFF43AA8B).value: false,
-        const Color(0xFF4D908E).value: false,
-        const Color(0xFF577590).value: false,
-        const Color(0xFF277DA1).value: false,
-        const Color(0xFFD2B7E5).value: false,
-        const Color(0xFFB185DB).value: false,
-        const Color(0xFF6247AA).value: false,
-      };
+      weekdays = workoutWeekdays;
+      colors = workoutColors;
     }
     nameController = TextEditingController(text: widget.workout?.name);
     super.initState();
@@ -92,7 +71,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
               decoration: const InputDecoration(hintText: 'Name'),
               maxLength: 30,
             ),
-            ColorPicker(workoutColors: workoutColors),
+            ColorPicker(workoutColors: colors),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 24),
               child: Divider(thickness: 0.3),
@@ -131,7 +110,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
                   name: nameController.text,
                   schedule: schedule,
                   weekdays: weekdays,
-                  color: workoutColors,
+                  color: colors,
                   createdAt: DateTime.timestamp(),
                 );
                 await context.read<WorkoutCubit>().addWorkout(
@@ -190,7 +169,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
                   name: nameController.text,
                   schedule: schedule,
                   weekdays: weekdays,
-                  color: workoutColors,
+                  color: colors,
                 );
                 await context.read<WorkoutCubit>().editWorkout(
                       workout: workout,
