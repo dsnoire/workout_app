@@ -7,7 +7,7 @@ class StatisticsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Statistics'),
+        title: const Text('Statistics'),
       ),
     );
   }
