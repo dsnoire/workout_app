@@ -29,7 +29,9 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: '/workout',
-        builder: (context, state) => const WorkoutView(),
+        builder: (context, state) => WorkoutView(
+          workout: state.extra as Workout,
+        ),
       ),
       ShellRoute(
         navigatorKey: _shellNavigator,

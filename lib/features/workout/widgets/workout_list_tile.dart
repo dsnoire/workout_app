@@ -19,7 +19,10 @@ class WorkoutListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.push('/workout'),
+      onTap: () => context.push(
+        '/workout',
+        extra: workout,
+      ),
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 22,

@@ -84,8 +84,9 @@ class WorkoutsView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
-          Icons.add,
-          size: 30,
+          Icons.note_add,
+          color: Colors.white,
+          size: 28,
         ),
         onPressed: () {
           context.push('/add-workout');
