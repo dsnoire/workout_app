@@ -82,4 +82,18 @@ class WorkoutCubit extends Cubit<WorkoutState> {
       );
     }
   }
+
+  Future<void> removeAllWorkouts() async {
+    emit(const WorkoutState.loading());
+    try {
+      await _workoutRepository.removeAllWorkouts();
+      getWorkouts();
+    } catch (e) {
+      emit(
+        WorkoutState.error(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }

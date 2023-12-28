@@ -43,8 +43,8 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
       colors = Map.from(widget.workout!.color);
     } else {
       schedule = WorkoutScheduleEnum.fullBodyWorkout;
-      weekdays = workoutWeekdays;
-      colors = workoutColors;
+      weekdays = Map.from(workoutWeekdays);
+      colors = Map.from(workoutColors);
     }
     nameController = TextEditingController(text: widget.workout?.name);
     super.initState();
@@ -138,12 +138,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
                       actions: [
                         TextButton(
                           onPressed: () => context.pop(),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(
-                              color: Colors.white.withAlpha(150),
-                            ),
-                          ),
+                          child: const Text('Cancel'),
                         ),
                         TextButton(
                           onPressed: () async {

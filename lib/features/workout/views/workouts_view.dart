@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:workout_app/core/constants/app_dimens.dart';
-import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
-
-import '../../../core/constants/app_colors.dart';
+import 'package:workout_app/features/common/widgets/custom_app_bar.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
 import '../widgets/workouts_list_view.dart';
 
@@ -18,6 +16,43 @@ class WorkoutsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Workouts',
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Remove all workouts'),
+                    content: const Text(
+                        'Are you sure you want to remove all the workouts?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => context.pop(),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () async {
+                          await context
+                              .read<WorkoutCubit>()
+                              .removeAllWorkouts();
+                          if (context.mounted) {
+                            context.pop();
+                          }
+                        },
+                        child: const Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            icon: const Icon(Icons.delete_forever),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.sizeXL,

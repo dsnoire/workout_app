@@ -35,4 +35,7 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
 
   @override
   Future<void> removeWorkout({required String id}) async => _box.delete(id);
+
+  @override
+  Future<void> removeAllWorkouts() async => await _box.deleteAll(_box.keys);
 }

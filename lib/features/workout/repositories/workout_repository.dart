@@ -5,4 +5,5 @@ abstract class WorkoutRepository {
   Future<void> addWorkout({required Workout workout, required String id});
   Future<void> editWorkout({required Workout workout, required String id});
   Future<void> removeWorkout({required String id});
+  Future<void> removeAllWorkouts();
 }
