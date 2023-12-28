@@ -5,13 +5,14 @@ import 'package:workout_app/features/home/views/home_view.dart';
 import 'package:workout_app/features/statistics/views/statistics_view.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 import 'package:workout_app/features/workout/views/add_or_edit_workout.dart';
+import 'package:workout_app/features/workout/views/workout_view.dart';
 import 'package:workout_app/features/workout/views/workouts_view.dart';
 
 final GlobalKey<NavigatorState> _rootNavigator = GlobalKey(debugLabel: 'root');
 final GlobalKey<NavigatorState> _shellNavigator =
     GlobalKey(debugLabel: 'shell');
 
-class AppRouter {
+abstract class AppRouter {
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigator,
     initialLocation: '/home',
@@ -25,6 +26,10 @@ class AppRouter {
       GoRoute(
         path: '/add-workout',
         builder: (context, state) => const AddOrEditWorkoutView(),
+      ),
+      GoRoute(
+        path: '/workout',
+        builder: (context, state) => const WorkoutView(),
       ),
       ShellRoute(
         navigatorKey: _shellNavigator,
