@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workout_app/features/common/views/root_view.dart';
+import 'package:workout_app/features/exercise/views/add_exercise_view.dart';
 import 'package:workout_app/features/home/views/home_view.dart';
 import 'package:workout_app/features/statistics/views/statistics_view.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
@@ -33,6 +34,9 @@ abstract class AppRouter {
           workout: state.extra as Workout,
         ),
       ),
+      GoRoute(
+          path: '/add-exercise',
+          builder: (context, state) => const AddExerciseView()),
       ShellRoute(
         navigatorKey: _shellNavigator,
         builder: (

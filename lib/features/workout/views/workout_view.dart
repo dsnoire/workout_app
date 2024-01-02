@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workout_app/core/constants/app_dimens.dart';
 
 import 'package:workout_app/features/common/widgets/custom_app_bar.dart';
@@ -25,7 +26,20 @@ class WorkoutView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(),
+            ListView.separated(
+              shrinkWrap: true,
+              itemCount: 7,
+              separatorBuilder: (_, __) => const SizedBox(height: 16),
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Text(
+                    '${index + 1}',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  title: const Text('XYZ'),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -41,7 +55,7 @@ class WorkoutView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () => context.push('/add-exercise'),
               icon: const Icon(
                 Icons.add_circle,
                 color: Colors.white,
