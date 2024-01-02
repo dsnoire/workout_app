@@ -37,15 +37,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
 
   @override
   void initState() {
-    if (widget.workout != null) {
-      schedule = widget.workout!.schedule;
-      weekdays = Map.from(widget.workout!.weekdays);
-      colors = Map.from(widget.workout!.color);
-    } else {
-      schedule = WorkoutScheduleEnum.fullBodyWorkout;
-      weekdays = Map.from(workoutWeekdays);
-      colors = Map.from(workoutColors);
-    }
+    _initializeValues();
     nameController = TextEditingController(text: widget.workout?.name);
     super.initState();
   }
@@ -56,11 +48,17 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
     super.dispose();
   }
 
+  void _initializeValues() {
+    schedule = widget.workout?.schedule ?? WorkoutScheduleEnum.fullBodyWorkout;
+    weekdays = Map.from(widget.workout?.weekdays ?? workoutWeekdays);
+    colors = Map.from(widget.workout?.color ?? workoutColors);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: widget.workout != null ? widget.workout!.name : 'New workout',
+        title: widget.workout == null ? 'New Workout' : null,
         actions: _buildAppBarActions(context),
       ),
       body: SingleChildScrollView(
