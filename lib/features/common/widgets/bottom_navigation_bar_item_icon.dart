@@ -21,7 +21,7 @@ class BottomNavigationBarItemIcon extends StatelessWidget {
       child: SvgPicture.asset(
         path,
         colorFilter: ColorFilter.mode(
-          color ?? AppColors.unselectedGreyColor,
+          color ?? AppColors.unselectedColor,
           BlendMode.srcIn,
         ),
         fit: BoxFit.cover,

@@ -25,7 +25,7 @@ class WorkoutSchedulePicker extends StatelessWidget {
         DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
-              color: AppColors.unselectedGreyColor,
+              color: AppColors.unselectedColor,
               width: 0.7,
             ),
             borderRadius: BorderRadius.circular(30),
@@ -33,18 +33,25 @@ class WorkoutSchedulePicker extends StatelessWidget {
           child: DropdownButton<WorkoutScheduleEnum>(
             padding: const EdgeInsets.symmetric(
               horizontal: 22,
-              vertical: 10,
+              vertical: 5,
             ),
             underline: const SizedBox(),
             icon: const Icon(Icons.keyboard_arrow_down_rounded),
-            dropdownColor: AppColors.primaryColor,
+            dropdownColor: AppColors.darkerContrastColor,
             value: schedule,
-            items: WorkoutScheduleEnum.values.map((workoutSchedule) {
-              return DropdownMenuItem(
-                value: workoutSchedule,
-                child: Center(child: Text(workoutSchedule.name)),
-              );
-            }).toList(),
+            items: WorkoutScheduleEnum.values.map(
+              (workoutSchedule) {
+                return DropdownMenuItem(
+                  value: workoutSchedule,
+                  child: Center(
+                    child: Text(
+                      workoutSchedule.name,
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
             onChanged: onChanged,
           ),
         ),

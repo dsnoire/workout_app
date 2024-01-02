@@ -60,6 +60,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        title: widget.workout != null ? widget.workout!.name : 'New workout',
         actions: _buildAppBarActions(context),
       ),
       body: Padding(

@@ -62,7 +62,7 @@ class _WeekdaysPickerState extends State<WeekdaysPicker> {
                     style: Theme.of(context).textTheme.labelMedium!.copyWith(
                           color: isSelected
                               ? Colors.white
-                              : AppColors.unselectedGreyColor,
+                              : AppColors.unselectedColor,
                         ),
                   ),
                 ),

@@ -47,7 +47,7 @@ class WorkoutListTile extends StatelessWidget {
                 ),
                 PopupMenuButton<WorkoutPopupMenuActionEnum>(
                   iconSize: 19,
-                  color: const Color(0xFF131313),
+                  color: AppColors.darkerContrastColor,
                   elevation: 0,
                   onSelected: (WorkoutPopupMenuActionEnum action) async {
                     if (action == WorkoutPopupMenuActionEnum.edit) {
@@ -106,7 +106,7 @@ class WorkoutListTile extends StatelessWidget {
                   return CircleAvatar(
                     backgroundColor: isSelected == true
                         ? Color(color)
-                        : const Color(0xFF131313),
+                        : AppColors.darkerContrastColor,
                     child: Text(
                       workout.weekdays.keys
                           .getWeekdayAbbreviation(index: index),
