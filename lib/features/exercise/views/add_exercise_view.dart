@@ -14,19 +14,18 @@ class AddExerciseView extends StatelessWidget {
       appBar: const CustomAppBar(
         title: 'Add exercise',
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 32,
-        ),
-        child: Column(
-          children: [
-            const TextField(
-                decoration: InputDecoration(hintText: 'Exercise name')),
-            const SizedBox(height: 32),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 32,
+          ),
+          child: Column(
+            children: [
+              const TextField(
+                  decoration: InputDecoration(hintText: 'Exercise name')),
+              const SizedBox(height: 32),
+              Column(
                 children: [
                   Text(
                     'Sets',
@@ -58,9 +57,9 @@ class AddExerciseView extends StatelessWidget {
                     onTimerDurationChanged: (Duration newDuration) {},
                   )
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

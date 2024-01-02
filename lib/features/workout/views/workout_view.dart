@@ -28,7 +28,7 @@ class WorkoutView extends StatelessWidget {
           children: [
             ListView.separated(
               shrinkWrap: true,
-              itemCount: 7,
+              itemCount: 4,
               separatorBuilder: (_, __) => const SizedBox(height: 16),
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(

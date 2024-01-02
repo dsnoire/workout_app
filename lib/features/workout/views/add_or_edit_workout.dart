@@ -63,38 +63,40 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
         title: widget.workout != null ? widget.workout!.name : 'New workout',
         actions: _buildAppBarActions(context),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(AppDimens.sizeXL),
-        child: Column(
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(hintText: 'Name'),
-              maxLength: 30,
-            ),
-            ColorPicker(workoutColors: colors),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: Divider(thickness: 0.3),
-            ),
-            WorkoutSchedulePicker(
-              schedule: schedule,
-              onChanged: (WorkoutScheduleEnum? value) {
-                setState(() {
-                  schedule = value!;
-                });
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: Divider(thickness: 0.3),
-            ),
-            WeekdaysPicker(weekdays: weekdays),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 24),
-              child: Divider(thickness: 0.3),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.sizeXL),
+          child: Column(
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(hintText: 'Name'),
+                maxLength: 30,
+              ),
+              ColorPicker(workoutColors: colors),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: Divider(thickness: 0.3),
+              ),
+              WorkoutSchedulePicker(
+                schedule: schedule,
+                onChanged: (WorkoutScheduleEnum? value) {
+                  setState(() {
+                    schedule = value!;
+                  });
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: Divider(thickness: 0.3),
+              ),
+              WeekdaysPicker(weekdays: weekdays),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 24),
+                child: Divider(thickness: 0.3),
+              ),
+            ],
+          ),
         ),
       ),
     );
