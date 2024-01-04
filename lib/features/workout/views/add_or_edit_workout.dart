@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_app/core/constants/app_colors.dart';
 import 'package:workout_app/features/common/widgets/action_button.dart';
-
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 import 'package:workout_app/features/workout/utils/workout_colors.dart';
