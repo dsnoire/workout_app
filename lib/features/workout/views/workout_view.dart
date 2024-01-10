@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workout_app/core/constants/app_dimens.dart';
 
-import 'package:workout_app/features/common/widgets/custom_app_bar.dart';
-import 'package:workout_app/features/workout/models/workout.dart';
-
+import '../../../core/constants/app_dimens.dart';
+import '../models/workout.dart';
 import '../../../core/constants/app_colors.dart';
 
 class WorkoutView extends StatelessWidget {
@@ -18,28 +16,44 @@ class WorkoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: workout.name),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.sizeXL,
-          vertical: 32,
+      appBar: AppBar(title: Text(workout.name)),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppDimens.layoutHorizontal,
+          vertical: AppDimens.layoutVertical,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ListView.separated(
-              shrinkWrap: true,
-              itemCount: 4,
-              separatorBuilder: (_, __) => const SizedBox(height: 16),
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Text(
-                    '${index + 1}',
-                    style: Theme.of(context).textTheme.labelMedium,
-                  ),
-                  title: const Text('XYZ'),
-                );
-              },
-            ),
+            // BlocBuilder<ExerciseCubit, ExerciseState>(
+            //   builder: (context, state) {
+            //     return state.when(
+            //       loaded: (exercises) => ListView.separated(
+            //         shrinkWrap: true,
+            //         itemCount: exercises.length,
+            //         separatorBuilder: (_, __) => const SizedBox(height: 16),
+            //         itemBuilder: (BuildContext context, int index) {
+            //           return ListTile(
+            //             leading: Text(
+            //               '${index + 1}',
+            //               style: Theme.of(context).textTheme.labelMedium,
+            //             ),
+            //             title: Text(exercises[index].name),
+            //           );
+            //         },
+            //       ),
+            //       empty: () {
+            //         print('no exercises');
+            //         return const Center(
+            //           child: Text('No exercises'),
+            //         );
+            //       },
+            //       error: () => const Center(
+            //         child: Text('123'),
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),
@@ -55,7 +69,10 @@ class WorkoutView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              onPressed: () => context.push('/add-exercise'),
+              onPressed: () => context.push(
+                '/add-exercise',
+                extra: workout,
+              ),
               icon: const Icon(
                 Icons.add_circle,
                 color: Colors.white,

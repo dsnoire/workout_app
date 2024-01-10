@@ -35,8 +35,11 @@ abstract class AppRouter {
         ),
       ),
       GoRoute(
-          path: '/add-exercise',
-          builder: (context, state) => const AddExerciseView()),
+        path: '/add-exercise',
+        builder: (context, state) => AddExerciseView(
+          workout: state.extra as Workout,
+        ),
+      ),
       ShellRoute(
         navigatorKey: _shellNavigator,
         builder: (

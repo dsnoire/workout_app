@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 
+import '../../exercise/models/exercise.dart';
+
 part 'workout.freezed.dart';
 
 part 'workout.g.dart';
@@ -16,5 +18,6 @@ class Workout with _$Workout {
     @HiveField(3) required Map<String, bool> weekdays,
     @HiveField(4) required Map<int, bool> color,
     @HiveField(5) required DateTime createdAt,
+    @HiveField(6) @Default([]) List<Exercise> exercises,
   }) = _Workout;
 }

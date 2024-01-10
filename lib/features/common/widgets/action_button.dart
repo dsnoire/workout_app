@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/core/constants/app_colors.dart';
 
 class ActionButton extends StatelessWidget {
   const ActionButton({
     Key? key,
     required this.text,
-    this.background,
+    this.color,
     required this.onPressed,
   }) : super(key: key);
 
   final String text;
-  final Color? background;
+  final Color? color;
   final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: background,
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 12,
-        ),
-      ),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.titleSmall,
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: color ?? AppColors.primaryColor,
+            ),
       ),
     );
   }

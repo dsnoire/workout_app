@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-
 import '../models/workout.dart';
 import 'workout_list_tile.dart';
 

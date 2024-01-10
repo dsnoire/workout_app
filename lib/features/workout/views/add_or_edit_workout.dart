@@ -4,13 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_app/core/constants/app_colors.dart';
 import 'package:workout_app/features/common/widgets/action_button.dart';
+import 'package:workout_app/features/exercise/models/exercise.dart';
 import 'package:workout_app/features/workout/enums/workout_schedule_enum.dart';
 import 'package:workout_app/features/workout/models/workout.dart';
 import 'package:workout_app/features/workout/utils/workout_colors.dart';
 import 'package:workout_app/features/workout/utils/workout_weekdays.dart';
 
 import '../../../core/constants/app_dimens.dart';
-import '../../common/widgets/custom_app_bar.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/weekdays_picker.dart';
@@ -56,13 +56,16 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: widget.workout == null ? 'New Workout' : null,
+      appBar: AppBar(
+        title: Text(widget.workout == null ? 'New Workout' : ''),
         actions: _buildAppBarActions(context),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimens.sizeXL),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.layoutHorizontal,
+          vertical: AppDimens.layoutVertical,
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
               TextField(
@@ -112,6 +115,9 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
                   weekdays: weekdays,
                   color: colors,
                   createdAt: DateTime.timestamp(),
+                  exercises: [
+                    Exercise(id: '3', name: 'Test 1'),
+                  ],
                 );
                 await context.read<WorkoutCubit>().addWorkout(
                       workout: workout,
@@ -126,7 +132,7 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
         : [
             ActionButton(
               text: 'Remove',
-              background: AppColors.warningColor,
+              color: AppColors.warningColor,
               onPressed: () {
                 showDialog(
                   context: context,

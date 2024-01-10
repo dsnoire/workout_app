@@ -1,38 +1,81 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workout_app/core/constants/app_colors.dart';
-
-import 'package:workout_app/features/common/widgets/custom_app_bar.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:uuid/uuid.dart';
+import 'package:workout_app/core/constants/app_dimens.dart';
+import 'package:workout_app/features/common/widgets/action_button.dart';
+import 'package:workout_app/features/exercise/cubits/exercise_cubit/exercise_cubit.dart';
+import 'package:workout_app/features/exercise/models/exercise.dart';
+import 'package:workout_app/features/workout/models/workout.dart';
 
 import '../widgets/muscle_groups_bottom_sheet.dart';
 import '../widgets/sets_text_field.dart';
 
 class AddExerciseView extends StatefulWidget {
-  const AddExerciseView({super.key});
+  const AddExerciseView({
+    Key? key,
+    required this.workout,
+  }) : super(key: key);
+
+  final Workout workout;
 
   @override
   State<AddExerciseView> createState() => _AddExerciseViewState();
 }
 
 class _AddExerciseViewState extends State<AddExerciseView> {
+  late final TextEditingController nameController;
   bool value = false;
+
+  @override
+  void initState() {
+    nameController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Add exercise',
+      appBar: AppBar(
+        title: const Text('Add exercise'),
+        actions: [
+          ActionButton(
+            onPressed: () {
+              final exercise = Exercise(
+                id: const Uuid().v4(),
+                name: nameController.text,
+              );
+              context.read<ExerciseCubit>().addExercise(
+                    exercise: exercise,
+                    id: widget.workout.id,
+                  );
+              print(Hive.box('workouts').values);
+              context.pop();
+            },
+            text: 'Done',
+          )
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 32,
-          ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimens.layoutHorizontal,
+          vertical: AppDimens.layoutVertical,
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
-              const TextField(
-                decoration: InputDecoration(hintText: 'Exercise name'),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(hintText: 'Exercise name'),
               ),
               const SizedBox(height: 32),
               Column(
@@ -69,14 +112,13 @@ class _AddExerciseViewState extends State<AddExerciseView> {
                     ],
                   ),
                   const SizedBox(height: 32),
-                  value
-                      ? CupertinoTimerPicker(
-                          mode: CupertinoTimerPickerMode.ms,
-                          onTimerDurationChanged: (Duration newDuration) {
-                            print(newDuration);
-                          },
-                        )
-                      : const SizedBox(),
+                  if (value)
+                    CupertinoTimerPicker(
+                      mode: CupertinoTimerPickerMode.ms,
+                      onTimerDurationChanged: (Duration newDuration) {
+                        print(newDuration);
+                      },
+                    ),
                   const SizedBox(height: 24),
                   ListTile(
                     onTap: () => showModalBottomSheet(

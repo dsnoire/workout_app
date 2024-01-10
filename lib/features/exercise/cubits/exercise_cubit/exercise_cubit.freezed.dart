@@ -18,24 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ExerciseState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() loaded,
+    required TResult Function(List<Exercise> exercises) loaded,
     required TResult Function() empty,
     required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
+    TResult? Function(List<Exercise> exercises)? loaded,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? loaded,
+    TResult Function(List<Exercise> exercises)? loaded,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -43,7 +40,6 @@ mixin _$ExerciseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -51,7 +47,6 @@ mixin _$ExerciseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -59,7 +54,6 @@ mixin _$ExerciseState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -87,124 +81,12 @@ class _$ExerciseStateCopyWithImpl<$Res, $Val extends ExerciseState>
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$ExerciseStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'ExerciseState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() empty,
-    required TResult Function() error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? empty,
-    TResult? Function()? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? empty,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements ExerciseState {
-  const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
 abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Exercise> exercises});
 }
 
 /// @nodoc
@@ -214,60 +96,89 @@ class __$$LoadedImplCopyWithImpl<$Res>
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? exercises = null,
+  }) {
+    return _then(_$LoadedImpl(
+      exercises: null == exercises
+          ? _value._exercises
+          : exercises // ignore: cast_nullable_to_non_nullable
+              as List<Exercise>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl();
+  const _$LoadedImpl({required final List<Exercise> exercises})
+      : _exercises = exercises;
+
+  final List<Exercise> _exercises;
+  @override
+  List<Exercise> get exercises {
+    if (_exercises is EqualUnmodifiableListView) return _exercises;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_exercises);
+  }
 
   @override
   String toString() {
-    return 'ExerciseState.loaded()';
+    return 'ExerciseState.loaded(exercises: $exercises)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._exercises, _exercises));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_exercises));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() loaded,
+    required TResult Function(List<Exercise> exercises) loaded,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
-    return loaded();
+    return loaded(exercises);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
+    TResult? Function(List<Exercise> exercises)? loaded,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
-    return loaded?.call();
+    return loaded?.call(exercises);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? loaded,
+    TResult Function(List<Exercise> exercises)? loaded,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded();
+      return loaded(exercises);
     }
     return orElse();
   }
@@ -275,7 +186,6 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -286,7 +196,6 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -297,7 +206,6 @@ class _$LoadedImpl implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -311,7 +219,13 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ExerciseState {
-  const factory _Loaded() = _$LoadedImpl;
+  const factory _Loaded({required final List<Exercise> exercises}) =
+      _$LoadedImpl;
+
+  List<Exercise> get exercises;
+  @JsonKey(ignore: true)
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -352,8 +266,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() loaded,
+    required TResult Function(List<Exercise> exercises) loaded,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -363,8 +276,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
+    TResult? Function(List<Exercise> exercises)? loaded,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -374,8 +286,7 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? loaded,
+    TResult Function(List<Exercise> exercises)? loaded,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -389,7 +300,6 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -400,7 +310,6 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -411,7 +320,6 @@ class _$EmptyImpl implements _Empty {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,
@@ -466,8 +374,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() loaded,
+    required TResult Function(List<Exercise> exercises) loaded,
     required TResult Function() empty,
     required TResult Function() error,
   }) {
@@ -477,8 +384,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
+    TResult? Function(List<Exercise> exercises)? loaded,
     TResult? Function()? empty,
     TResult? Function()? error,
   }) {
@@ -488,8 +394,7 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? loaded,
+    TResult Function(List<Exercise> exercises)? loaded,
     TResult Function()? empty,
     TResult Function()? error,
     required TResult orElse(),
@@ -503,7 +408,6 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Empty value) empty,
     required TResult Function(_Error value) error,
@@ -514,7 +418,6 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Empty value)? empty,
     TResult? Function(_Error value)? error,
@@ -525,7 +428,6 @@ class _$ErrorImpl implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Empty value)? empty,
     TResult Function(_Error value)? error,

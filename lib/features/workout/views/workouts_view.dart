@@ -16,8 +16,8 @@ class WorkoutsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Workouts',
+      appBar: AppBar(
+        title: const Text('Workouts'),
         actions: [
           IconButton(
             onPressed: () {
@@ -55,8 +55,8 @@ class WorkoutsView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppDimens.sizeXL,
-          vertical: 32,
+          horizontal: AppDimens.layoutHorizontal,
+          vertical: AppDimens.layoutVertical,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

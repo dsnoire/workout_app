@@ -23,13 +23,14 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
       weekdays: (fields[3] as Map).cast<String, bool>(),
       color: (fields[4] as Map).cast<int, bool>(),
       createdAt: fields[5] as DateTime,
+      exercises: (fields[6] as List).cast<Exercise>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, _$WorkoutImpl obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class WorkoutImplAdapter extends TypeAdapter<_$WorkoutImpl> {
       ..writeByte(3)
       ..write(obj.weekdays)
       ..writeByte(4)
-      ..write(obj.color);
+      ..write(obj.color)
+      ..writeByte(6)
+      ..write(obj.exercises);
   }
 
   @override
