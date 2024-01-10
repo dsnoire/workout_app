@@ -10,30 +10,32 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sunday, 10 Dec'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppDimens.layoutHorizontal,
           vertical: AppDimens.layoutVertical,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            const SummaryProgressTile(),
+            const SizedBox(height: 75),
+            Column(
               children: [
-                SummaryProgressTile(),
-                SummaryProgressTile(),
+                Text(
+                  "Today's plan",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SummaryProgressTile(),
-                SummaryProgressTile(),
-              ],
-            ),
+            )
           ],
         ),
       ),

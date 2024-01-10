@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:workout_app/core/constants/app_dimens.dart';
-import 'package:workout_app/features/common/widgets/custom_app_bar.dart';
 import '../cubits/workout_cubit/workout_cubit.dart';
 import '../widgets/workouts_list_view.dart';
 
