@@ -34,10 +34,10 @@ class HomeView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Today's plan",
+                    "Today's workout",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  const SizedBox(height: 42),
+                  const SizedBox(height: 32),
                   const TodaysWorkout(),
                 ],
               ),

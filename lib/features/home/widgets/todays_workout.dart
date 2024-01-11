@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/core/constants/app_colors.dart';
 
 class TodaysWorkout extends StatelessWidget {
   const TodaysWorkout({
@@ -10,13 +11,16 @@ class TodaysWorkout extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 160,
+          height: 170,
           padding: const EdgeInsets.symmetric(
             horizontal: 22,
             vertical: 16,
           ),
           decoration: BoxDecoration(
-            color: const Color(0xFF0C0C0C),
+            border: Border.all(
+              width: 2,
+              color: AppColors.contrastColor,
+            ),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Column(
@@ -56,7 +60,7 @@ class TodaysWorkout extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
-            height: 40,
+            height: 30,
             decoration: const BoxDecoration(
               color: Color(0xFF577590),
               borderRadius: BorderRadius.only(

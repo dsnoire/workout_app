@@ -15,7 +15,6 @@ class SummaryProgressTile extends StatelessWidget {
       height: 300,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: const Color(0xFF0C0C0C),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -36,7 +35,7 @@ class SummaryProgressTile extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   ChartIndicator(
-                    color: AppColors.darkerContrastColor,
+                    color: AppColors.contrastColor,
                     text: 'Pending',
                   ),
                   SizedBox(width: 8),
@@ -55,25 +54,26 @@ class SummaryProgressTile extends StatelessWidget {
                         PieChartSectionData(
                           color: AppColors.primaryColor,
                           value: 3,
-                          radius: 30,
-                          title: '3',
+                          radius: 25,
+                          showTitle: false,
                         ),
                         PieChartSectionData(
-                          color: AppColors.darkerContrastColor,
+                          color: AppColors.contrastColor,
                           value: 2,
-                          radius: 30,
-                          title: '2',
+                          radius: 25,
+                          showTitle: false,
                         ),
                       ],
                     ),
                   ),
                 ),
+                const SizedBox(width: 12),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       '3 of 5 workouts',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
