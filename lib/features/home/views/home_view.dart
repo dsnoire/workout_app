@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/core/constants/app_dimens.dart';
 import 'package:workout_app/features/home/widgets/summary_progress_tile.dart';
+import '../widgets/todays_workout.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -28,13 +29,18 @@ class HomeView extends StatelessWidget {
           children: [
             const SummaryProgressTile(),
             const SizedBox(height: 75),
-            Column(
-              children: [
-                Text(
-                  "Today's plan",
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Today's plan",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 42),
+                  const TodaysWorkout(),
+                ],
+              ),
             )
           ],
         ),
