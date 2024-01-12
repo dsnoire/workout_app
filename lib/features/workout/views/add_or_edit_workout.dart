@@ -67,17 +67,16 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
         ),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextField(
                 controller: nameController,
                 decoration: const InputDecoration(hintText: 'Name'),
                 maxLength: 30,
               ),
+              const SizedBox(height: 16),
               ColorPicker(workoutColors: colors),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Divider(thickness: 0.3),
-              ),
+              const SizedBox(height: 32),
               WorkoutSchedulePicker(
                 schedule: schedule,
                 onChanged: (WorkoutScheduleEnum? value) {
@@ -86,15 +85,8 @@ class _AddOrEditWorkoutViewState extends State<AddOrEditWorkoutView> {
                   });
                 },
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Divider(thickness: 0.3),
-              ),
+              const SizedBox(height: 40),
               WeekdaysPicker(weekdays: weekdays),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Divider(thickness: 0.3),
-              ),
             ],
           ),
         ),

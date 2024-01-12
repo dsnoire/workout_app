@@ -21,7 +21,7 @@ class WorkoutSchedulePicker extends StatelessWidget {
           'Schedule',
           style: Theme.of(context).textTheme.labelLarge,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
