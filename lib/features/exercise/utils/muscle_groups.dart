@@ -9,4 +9,9 @@ final Map<String, bool> muscleGroups = {
   'Legs': false,
   'Glutes': false,
   'ABS': false,
+  'A3BS': false,
+  'ABS3': false,
+  'AB3S': false,
+  'AB33S': false,
+  'AB23S': false,
 };

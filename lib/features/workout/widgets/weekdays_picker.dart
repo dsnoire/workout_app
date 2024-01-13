@@ -25,8 +25,10 @@ class _WeekdaysPickerState extends State<WeekdaysPicker> {
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          runSpacing: 8,
+          spacing: 8,
+          alignment: WrapAlignment.center,
           children: List.generate(
             widget.weekdays.length,
             (index) {

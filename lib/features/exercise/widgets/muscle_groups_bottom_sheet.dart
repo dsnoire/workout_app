@@ -54,40 +54,41 @@ class _MuscleGroupsBottomSheetState extends State<MuscleGroupsBottomSheet> {
                 ),
               ],
             ),
-            ListView.separated(
-              separatorBuilder: (_, __) => const SizedBox(
-                height: 16,
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (_, __) => const SizedBox(
+                  height: 16,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 20,
+                ),
+                itemCount: muscleGroups.keys.length,
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                ) {
+                  return Row(
+                    children: [
+                      Checkbox(
+                        value: muscleGroups.values.elementAt(index),
+                        onChanged: (newValue) {
+                          setState(() {
+                            muscleGroups.update(
+                                muscleGroups.keys.elementAt(index),
+                                (value) => newValue!);
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        muscleGroups.keys.elementAt(index),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )
+                    ],
+                  );
+                },
               ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 20,
-              ),
-              shrinkWrap: true,
-              itemCount: muscleGroups.keys.length,
-              itemBuilder: (
-                BuildContext context,
-                int index,
-              ) {
-                return Row(
-                  children: [
-                    Checkbox(
-                      value: muscleGroups.values.elementAt(index),
-                      onChanged: (newValue) {
-                        setState(() {
-                          muscleGroups.update(
-                              muscleGroups.keys.elementAt(index),
-                              (value) => newValue!);
-                        });
-                      },
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      muscleGroups.keys.elementAt(index),
-                      style: Theme.of(context).textTheme.titleMedium,
-                    )
-                  ],
-                );
-              },
             )
           ],
         ),
